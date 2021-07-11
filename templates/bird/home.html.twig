@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}A Field Guide to Angry Birds{% endblock %}
+
+{# Ce block va "activer" le menu "The Birds" #}
+{% block menu_home %}active{% endblock %}
+
+{% block body %}
+
+    {{ include('_flash_messages.html.twig') }}
+
+    <!-- Header -->
+    <header class="container">
+        <div class="jumbotron mt-3 home-header">
+            <h1 class="display-4">A Field Guide to Angry Birds</h1>
+            <p class="lead">Games that lodge in the brain often have comical stars !</p>
+        </div>
+    </header>
+    
+    <main class="container main-content">
+        <div class="row">
+    
+            {% for index, bird in birds %}
+            <!-- Bird Card -->
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                <div class="card mb-3 bird-card">
+                    <a href="{{ path('bird_show', {id: index}) }}">
+                        <h3 class="card-header bird-card__title">{{ bird.name }}</h3>
+                        <img class="bird-card__image" src="{{ asset( 'images/' ~ bird.image ) }}" width="100%">
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        
+        </div>
+    
+    </main>
+
+{% endblock %}
