@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ bird.name }}{% endblock %}
+
+{% block menu_home %}active{% endblock %}
+
+{% block body %}
+
+    <main class="container main-content">
+    
+        <div class="jumbotron mt-3 bird-detail">
+            <h1 class="display-4">{{ bird.name }}</h1>
+    
+            {{ include('_flash_messages.html.twig') }}
+
+            <div class="row">
+                <div class="col-3">
+                    <img class="bird-card__image" src="{{ asset('images/' ~ bird.image) }}" width="50%">
+                </div>
+                <div class="col-9">
+                    <p class="lead">{{ bird.description }}</p>
+                    <hr>
+                    <form action="{{ path('cart_add') }}" method="post">
+                        <input type="hidden" name="id" value="{{ id }}">
+                        <button class="btn btn-primary btn-lg" type="submit">Add to cart</button>
+                    </form>
+                </div>
+            </div>
+
+            <hr class="my-4">
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{{ path('home') }}" role="button">Back to list</a>
+            </p>
+        </div>
+    
+    </main>
+
+
+{% endblock %}

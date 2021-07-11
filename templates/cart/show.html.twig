@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Cart{% endblock %}
+
+{% block menu_cart %}active{% endblock %}
+
+{% block body %}
+
+<main class="container main-content cart bird-card">
+
+    <h1>Your cart</h1>
+
+    {{ include('_flash_messages.html.twig') }}
+
+    {% if cart is not null %}
+
+    <table class="table table-hover cart-list">
+        <!-- En-têtes du tableau -->
+        <thead>
+            <tr>
+                <th scope="col">Bird</th>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr class="cart-list-item">
+                <td><img class="cart-list-item__image" src="{{ asset('images/' ~ item.bird.image) }}"></td>
+                <td>{{ item.bird.name }}</td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-danger btn-lg" href="{{ path('cart_clear') }}" role="button">Empty Cart</a>
+
+    {% else %}
+
+    <p>Your cart is empty.</p>
+    
+    {% endif %}
+
+</main>
+
+{% endblock %}
